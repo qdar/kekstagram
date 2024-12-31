@@ -1,7 +1,7 @@
-const getLengthString = (string, maxSize) => string.length <= maxSize;
+const getLengthString = (string, length) => string.length <= length;
 
-function getLengthStringTwo (string, maxSize) {
-  return string.length <= maxSize;
+function getLengthStringTwo (string, length) {
+  return string.length <= length;
 }
 
 
@@ -39,3 +39,18 @@ function extractNumber(arg) {
 }
 extractNumber(testString);
 
+
+// const extractNumber = (string) => {
+//   if (typeof string === 'number') {
+//     return string;
+//   }
+
+//   let result = '';
+//   for (let i = 0; i < string.length; i++) {
+//     if ( !Number.isNaN(parseInt(string.at(i), 10))) {
+//     result += string.at(i);
+//     }
+//   }
+
+//   return parseInt(result, 10);
+// }
