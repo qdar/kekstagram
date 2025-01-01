@@ -1,3 +1,7 @@
+const PHOTO_COUNT = 25;
+const LIKE_MIN_COUNT = 15;
+const LIKE_MAX_COUNT = 200;
+
 const AVATARS = [
   'img/avatar-1.svg',
   'img/avatar-2.svg',
@@ -7,7 +11,7 @@ const AVATARS = [
   'img/avatar-6.svg',
 ];
 
-const MESSAGE = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец от света.',
@@ -26,7 +30,7 @@ const NAMES = [
   'Ли',
 ];
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Очень красивая фотография',
   'Приятная фотография',
   'Потрясающая фотография',
@@ -34,8 +38,6 @@ const DESCRIPTION = [
   'Приятная фотография',
   'Потрясающая фотография',
 ];
-
-const SIMILAR_PHOTO_COUNT = 25;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -72,15 +74,15 @@ function createRandomIdFromRangeGenerator(min, max) {
 }
 
 const generateCommentId = createRandomIdFromRangeGenerator(1, 100);
-const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
-const generatePhotoUrl = createRandomIdFromRangeGenerator(1, 25);
+const generatePhotoId = createRandomIdFromRangeGenerator(1, PHOTO_COUNT);
+const generatePhotoUrl = createRandomIdFromRangeGenerator(1, PHOTO_COUNT);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const createComment = () => ({
   id: generateCommentId(),
   avatar: getRandomArrayElement(AVATARS),
-  message: getRandomArrayElement(MESSAGE),
+  message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
@@ -91,13 +93,14 @@ function createComments() {
 const createPhoto = () => ({
   id: generatePhotoId(),
   url: `photos/${generatePhotoUrl()}.jpg`,
-  description: getRandomArrayElement(DESCRIPTION),
-  likes: getRandomInteger(15, 200),
+  description: getRandomArrayElement(DESCRIPTIONS),
+  likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: createComments(),
 });
 
-const similarPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, createPhoto);
-console.log(similarPhotos);
+const similarPhotos = Array.from({length: PHOTO_COUNT}, createPhoto);
+
+similarPhotos();
 
 // const photo = {
 //   id: 1,
