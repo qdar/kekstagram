@@ -1,13 +1,12 @@
-import {LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENTS_MAX_COUNT, PHOTO_COUNT} from './data.js';
-import {DESCRIPTIONS} from './array.js';
-import {getRandomInteger} from './getRandomInteger.js';
-import {getRandomArrayElement} from './getRandomArrayElement.js';
-import {RangeGenerator} from './rangeGenerator.js';
+import {LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENTS_MAX_COUNT, PHOTO_COUNT} from './constants.js';
+import {DESCRIPTIONS} from './imagesData.js';
+import {getRandomInteger, getRandomArrayElement} from './getRandomInteger.js';
+import {rangeGenerator} from './rangeGenerator.js';
 
 import {createComment} from './createComment.js';
 
-const generatePhotoId = RangeGenerator(1, PHOTO_COUNT);
-const generatePhotoUrl = RangeGenerator(1, PHOTO_COUNT);
+const generatePhotoId = rangeGenerator(1, PHOTO_COUNT);
+const generatePhotoUrl = rangeGenerator(1, PHOTO_COUNT);
 
 const createPhoto = () => ({
   id: generatePhotoId(),

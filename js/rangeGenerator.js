@@ -1,6 +1,6 @@
 import {getRandomInteger} from './getRandomInteger.js';
 
-function RangeGenerator(min, max) {
+function rangeGenerator(min, max) {
   const previousValues = [];
 
   return function () {
@@ -16,4 +16,4 @@ function RangeGenerator(min, max) {
   };
 }
 
-export { RangeGenerator };
+export { rangeGenerator };

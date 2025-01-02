@@ -1,8 +1,8 @@
-import {AVATARS, MESSAGES, NAMES} from './array.js';
-import {getRandomArrayElement} from './getRandomArrayElement.js';
-import {RangeGenerator} from './rangeGenerator.js';
+import {AVATARS, MESSAGES, NAMES} from './imagesData.js';
+import {rangeGenerator} from './rangeGenerator.js';
+import {getRandomArrayElement} from './getRandomInteger.js';
 
-const generateCommentId = RangeGenerator(1, 100);
+const generateCommentId = rangeGenerator(1, 100);
 
 const createComment = () => ({
   id: generateCommentId(),
