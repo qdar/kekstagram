@@ -1,22 +1,24 @@
 import {PHOTO_COUNT} from './constants.js';
 import {createPhoto} from './createPhoto.js';
 
-const getPhotos = Array.from({length: PHOTO_COUNT}, createPhoto);
-// eslint-disable-next-line no-console
-console.log(getPhotos);
+const getPhotos = (count) => Array.from({length: count }, createPhoto);
 
-const pictures = document.querySelectorAll('.pictures');
+const picturesSection = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const similarPictures = createPhoto();
-
-similarPictures.forEach((item) => {
-  const pictureLink = pictureTemplate.cloneNode(true);
-  pictureLink.querySelector('.picture__likes').textContent = item.likes;
-  pictures.appendChild(pictureLink);
-});
+const allPictures = getPhotos(PHOTO_COUNT);
 
 const pictureListFragment = document.createDocumentFragment();
-pictures.appendChild(pictureListFragment);
+
+allPictures.forEach((item) => {
+  const pictureLink = pictureTemplate.cloneNode(true);
+  pictureLink.querySelector('.picture__likes').textContent = item.likes;
+  pictureLink.querySelector('.picture__comments').textContent = item.comments.length;
+  pictureLink.querySelector('.picture__img').src = item.url;
+  picturesSection.appendChild(pictureLink);
+});
+
+
+picturesSection.appendChild(pictureListFragment);
 
 
