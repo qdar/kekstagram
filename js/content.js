@@ -1,9 +1,4 @@
-import {PHOTO_COUNT} from './constants.js';
 import {createPhoto} from './createPhoto.js';
-
-const getPhotos = Array.from({length: PHOTO_COUNT}, createPhoto);
-// eslint-disable-next-line no-console
-console.log(getPhotos);
 
 const pictures = document.querySelectorAll('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -18,5 +13,3 @@ similarPictures.forEach((item) => {
 
 const pictureListFragment = document.createDocumentFragment();
 pictures.appendChild(pictureListFragment);
-
-
