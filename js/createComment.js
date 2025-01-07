@@ -1,6 +1,5 @@
 import {AVATARS, MESSAGES, NAMES} from './imagesData.js';
-import {rangeGenerator} from './rangeGenerator.js';
-import {getRandomArrayElement} from './getRandomInteger.js';
+import {getRandomArrayElement, rangeGenerator} from './functions.js';
 
 const generateCommentId = rangeGenerator(1, 100);
 
