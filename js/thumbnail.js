@@ -3,7 +3,7 @@ import {DESCRIPTIONS} from './imagesData.js';
 import {getRandomInteger, getRandomArrayElement, rangeGenerator} from './functions.js';
 import {createComment} from './createComment.js';
 import {generateModal} from './modal.js';
-import {generatebigPicture} from './bigPicture.js';
+import {generateBigPicture} from './bigPicture.js';
 
 const generatePhotoId = rangeGenerator(1, PHOTO_COUNT);
 const generatePhotoUrl = rangeGenerator(1, PHOTO_COUNT);
@@ -30,7 +30,7 @@ Thumbnails.forEach((item) => {
 
   pictureLink.addEventListener('click', (e) => {
     generateModal();
-    generatebigPicture(e, item);
+    generateBigPicture(e, item);
   });
 
 });
