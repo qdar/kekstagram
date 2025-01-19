@@ -2,6 +2,8 @@ import {LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENTS_MAX_COUNT, PHOTO_COUNT} from '.
 import {DESCRIPTIONS} from './imagesData.js';
 import {getRandomInteger, getRandomArrayElement, rangeGenerator} from './functions.js';
 import {createComment} from './createComment.js';
+import {generateModal} from './modal.js';
+import {generatebigPicture} from './bigPicture.js';
 
 const generatePhotoId = rangeGenerator(1, PHOTO_COUNT);
 const generatePhotoUrl = rangeGenerator(1, PHOTO_COUNT);
@@ -24,8 +26,13 @@ Thumbnails.forEach((item) => {
   pictureLink.querySelector('.picture__likes').textContent = item.likes;
   pictureLink.querySelector('.picture__comments').textContent = item.comments.length;
   pictureLink.querySelector('.picture__img').src = item.url;
-  pictureLink.dataset.thumbnailsID = item.id;
   picturesSection.appendChild(pictureLink);
+
+  pictureLink.addEventListener('click', (e) => {
+    generateModal();
+    generatebigPicture(e, item);
+  });
+
 });
 
 const pictureListFragment = document.createDocumentFragment();
