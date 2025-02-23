@@ -1,17 +1,9 @@
-<<<<<<< Updated upstream
-import {LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENTS_MAX_COUNT, PHOTO_COUNT} from './constants.js';
-import {DESCRIPTIONS} from './imagesData.js';
-import {getRandomInteger, getRandomArrayElement, rangeGenerator} from './functions.js';
-import {createComment} from './createComment.js';
-import {generateModal} from './modal.js';
-import {generatebigPicture} from './bigPicture.js';
-=======
+
 import {PHOTO_COUNT, DESCRIPTIONS, LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENTS_MAX_COUNT} from './data.js';
 import {getRandomArrayElement, rangeGenerator, getRandomInteger} from './functions.js';
 import {createComment} from './comments.js';
 import { generateModal } from './modal.js';
 import { generateBigPicture, bigPicture } from './singleImage.js';
->>>>>>> Stashed changes
 
 const generatePhotoId = rangeGenerator(1, 100);
 const generatePhotoUrl = rangeGenerator(1, PHOTO_COUNT);
@@ -39,12 +31,8 @@ Thumbnails.forEach((item) => {
 
   pictureLink.addEventListener('click', (e) => {
     generateModal();
-<<<<<<< Updated upstream
-    generatebigPicture(e, item);
-=======
     bigPicture.classList.remove('hidden');
     generateBigPicture(e, item);
->>>>>>> Stashed changes
   });
 
   const pictureListFragment = document.createDocumentFragment();
