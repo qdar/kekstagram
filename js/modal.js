@@ -1,13 +1,6 @@
-import {isEscapeKey} from './functions.js';
+import {onPopupEscKeydown} from './functions.js';
 
 const body = document.querySelector('body');
-
-const onPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeModal();
-  }
-};
 
 function generateModal() {
   body.classList.add('modal-open');

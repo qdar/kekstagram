@@ -17,22 +17,22 @@ const createThumbnail = () => ({
 });
 
 const renderThumbnails = (count) => Array.from({length: count }, createThumbnail);
-const Thumbnails = renderThumbnails(PHOTO_COUNT);
+const thumbnails = renderThumbnails(PHOTO_COUNT);
 
 const thumbnailsSection = document.querySelector('.pictures');
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-Thumbnails.forEach((item) => {
+thumbnails.forEach((photo) => {
   const pictureLink = thumbnailTemplate.cloneNode(true);
-  pictureLink.querySelector('.picture__likes').textContent = item.likes;
-  pictureLink.querySelector('.picture__comments').textContent = item.comments.length;
-  pictureLink.querySelector('.picture__img').src = item.url;
+  pictureLink.querySelector('.picture__likes').textContent = photo.likes;
+  pictureLink.querySelector('.picture__comments').textContent = photo.comments.length;
+  pictureLink.querySelector('.picture__img').src = photo.url;
   thumbnailsSection.appendChild(pictureLink);
 
-  pictureLink.addEventListener('click', (e) => {
+  pictureLink.addEventListener('click', () => {
     generateModal();
     bigPicture.classList.remove('hidden');
-    generateBigPicture(e, item);
+    generateBigPicture(photo);
   });
 
   const pictureListFragment = document.createDocumentFragment();

@@ -3,8 +3,8 @@ import {closeModal} from './modal.js';
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = bigPicture.querySelector('#picture-cancel');
 
-const commentsLoader = bigPicture.querySelector('.comments-loader');
 const commentList = bigPicture.querySelector('.social__comments');
+const commentsLoader = bigPicture.querySelector('.comments-loader');
 const commentCount = bigPicture.querySelector('.social__comment-count');
 
 function generateItemsComments(comments, start, end) {
@@ -22,23 +22,19 @@ function generateItemsComments(comments, start, end) {
   `).join('');
 }
 
-function generateBigPicture(e, dataImage) {
-  let commentsShow = 5;
+function generateBigPicture(dataImage) {
+  let commentsShow = 0;
 
-  generateItemsComments(dataImage.comments, 0, commentsShow);
   bigPicture.querySelector('.big-picture__img img').src = dataImage.url;
   bigPicture.querySelector('.likes-count').textContent = dataImage.likes;
   bigPicture.querySelector('.comments-count').textContent = dataImage.comments.length;
   bigPicture.querySelector('.social__caption').textContent = dataImage.description;
+  // commentCount.innerHTML = `${commentsShow} из <span class="comments-count">${dataImage.comments.length}</span> комментариев`;
 
   const allComments = generateItemsComments(dataImage.comments, 0, commentsShow);
   commentList.innerHTML = allComments;
 
-  if (commentsShow >= dataImage.comments.length) {
-    commentsLoader.classList.add('hidden');
-  } else {
-    commentsLoader.classList.remove('hidden');
-  }
+  commentsLoader.classList.toggle('hidden', commentsShow >= dataImage.comments.length);
 
   commentsLoader.addEventListener('click', () => {
     commentsShow += 5;

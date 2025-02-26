@@ -1,3 +1,6 @@
+import {closeModal} from './modal.js';
+import {bigPicture} from './singleImage.js';
+
 function getRandomInteger(a, b) {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -25,4 +28,12 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {rangeGenerator, getRandomInteger, getRandomArrayElement, isEscapeKey};
+const onPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    bigPicture.classList.add('hidden');
+    closeModal();
+  }
+};
+
+export {rangeGenerator, getRandomInteger, getRandomArrayElement, isEscapeKey, onPopupEscKeydown};

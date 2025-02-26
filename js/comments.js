@@ -1,12 +1,11 @@
-import {AVATARS_MAX_COUNT, MESSAGES, NAMES} from './data.js';
-import {getRandomArrayElement, rangeGenerator} from './functions.js';
+import {AVATARS_MAX_COUNT, MESSAGES, NAMES, COMMENTS_MAX_COUNT} from './data.js';
+import {getRandomArrayElement, rangeGenerator, getRandomInteger} from './functions.js';
 
-const generateCommentId = rangeGenerator(1, 100);
-const avatarUrl = rangeGenerator(1, AVATARS_MAX_COUNT);
+const generateCommentId = rangeGenerator(1, COMMENTS_MAX_COUNT);
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar-${avatarUrl()}.svg`,
+  avatar: `img/avatar-${getRandomInteger(1, AVATARS_MAX_COUNT)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
