@@ -1,4 +1,4 @@
-import {closeModal} from './modal.js';
+import {closeModal, onPopupEscKeydown} from './modal.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = bigPicture.querySelector('#picture-cancel');
@@ -23,7 +23,7 @@ function generateItemsComments(comments, start, end) {
 }
 
 function generateBigPicture(dataImage) {
-  let commentsShow = 0;
+  let commentsShow = 5;
 
   bigPicture.querySelector('.big-picture__img img').src = dataImage.url;
   bigPicture.querySelector('.likes-count').textContent = dataImage.likes;
@@ -52,11 +52,9 @@ function generateBigPicture(dataImage) {
     commentCount.innerHTML = `${commentsShow} из <span class="comments-count">${dataImage.comments.length}</span> комментариев`;
   });
 
-}
+  closeModal(bigPictureClose, bigPicture);
+  document.addEventListener('keydown', (evt) => onPopupEscKeydown(evt, bigPicture));
 
-bigPictureClose.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  closeModal();
-});
+}
 
 export {bigPicture, bigPictureClose, generateBigPicture};

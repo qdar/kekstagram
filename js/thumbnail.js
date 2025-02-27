@@ -30,8 +30,7 @@ thumbnails.forEach((photo) => {
   thumbnailsSection.appendChild(pictureLink);
 
   pictureLink.addEventListener('click', () => {
-    generateModal();
-    bigPicture.classList.remove('hidden');
+    generateModal(bigPicture);
     generateBigPicture(photo);
   });
 
