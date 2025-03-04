@@ -1,9 +1,14 @@
 import { onPopupEscKeydown, generateModal, closeModal } from './modal.js';
 import { TAG_ERROR_TEXT, MAX_HASHTAGS_COUNT, VALID_HASHTAGS } from './data.js';
+import { resetEffects } from './effects.js';
+import { resetScale } from './scale.js';
+import { isAtiveElement } from './functions.js';
 
 const uploadButton = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadCancel = document.querySelector('.img-upload__cancel');
+const hashtagField = document.querySelector('.text__hashtags');
+const descriptionField = document.querySelector('.text__description');
 
 const form = document.querySelector('.img-upload__form');
 const pristine = new Pristine(form, {
@@ -12,13 +17,17 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__field-wrapper__error',
 });
 
-// const fileField = document.querySelector('#upload-file');
-const hashtagField = document.querySelector('text__hashtags');
-// const commentField = document.querySelector('text__description');
+function resetForm() {
+  hashtagField.value = '';
+  descriptionField.value = '';
+}
 
 uploadButton.addEventListener('change', () => {
   generateModal(uploadOverlay);
   document.addEventListener('keydown', (evt) => onPopupEscKeydown(evt, uploadOverlay));
+  resetScale();
+  resetEffects();
+  resetForm();
 });
 
 closeModal(uploadCancel, uploadOverlay);
@@ -36,12 +45,17 @@ const validateTags = (value) => {
   return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
 };
 
-console.log(validateTags('#900 #903 #904'));
-
 pristine.addValidator(
   hashtagField,
   validateTags,
   TAG_ERROR_TEXT
 );
+
+isAtiveElement(hashtagField);
+isAtiveElement(descriptionField);
+
+// const isFocusedHashtag = document.activeElement = hashtagField;
+// const isFocusedDescriptionField = document.activeElement = descriptionField;
+// console.log(isFocusedDescriptionField);
 
 export {uploadOverlay};

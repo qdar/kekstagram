@@ -25,4 +25,12 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {rangeGenerator, getRandomInteger, getRandomArrayElement, isEscapeKey};
+function isAtiveElement(element) {
+  element.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.stopPropagation();
+    }
+  });
+}
+
+export {rangeGenerator, getRandomInteger, getRandomArrayElement, isEscapeKey, isAtiveElement};
