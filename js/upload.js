@@ -20,6 +20,7 @@ const pristine = new Pristine(form, {
 function resetForm() {
   hashtagField.value = '';
   descriptionField.value = '';
+  pristine.reset();
 }
 
 uploadButton.addEventListener('change', () => {
@@ -54,8 +55,4 @@ pristine.addValidator(
 isAtiveElement(hashtagField);
 isAtiveElement(descriptionField);
 
-// const isFocusedHashtag = document.activeElement = hashtagField;
-// const isFocusedDescriptionField = document.activeElement = descriptionField;
-// console.log(isFocusedDescriptionField);
-
-export {uploadOverlay};
+export {uploadOverlay, pristine};
