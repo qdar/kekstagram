@@ -16,29 +16,3 @@ setOnFormSubmit(async (data) => {
     showAlert (err.message);
   }
 });
-
-// try {
-//   const data = getData();
-//   console.log(data);
-//   // renderGallery(data);
-// } catch (err) {
-//   showAlert (err.message);
-// }
-
-// try {
-//   const data = await getData();
-//   renderGallery(data);
-// } catch (err) {
-//   showAlert (err.message);
-// }
-
-
-// fetch('https://28.javascript.htmlacademy.pro/kekstagram/data', {
-//   method: 'GET', body: null
-// })
-//   .then((response) => {
-//     if (!response.ok) {
-//       throw new Error(errorText);
-//     }
-//     return response.json();
-//   });

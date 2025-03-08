@@ -10,7 +10,7 @@ const ErrorText = {
   SEND_DATA: 'He удалось отправить форму. Попробуйте ещё раз',
 };
 
-const load = (route, errorText, method = 'GET', body = null) => {
+const load = (route, errorText, method = 'GET', body = null) =>
   fetch(`${SERVER}${route}`, {method, body})
     .then((response) => {
       if (!response.ok) {
@@ -21,7 +21,6 @@ const load = (route, errorText, method = 'GET', body = null) => {
     .catch(() => {
       throw new Error(errorText);
     });
-};
 
 const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
