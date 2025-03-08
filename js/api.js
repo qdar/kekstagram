@@ -1,4 +1,4 @@
-const SERVER = 'https://28.javascript.htmlacademy.pro/kekstagra';
+const SERVER = 'https://28.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA: '/data',
@@ -27,4 +27,4 @@ const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
 
 const sendData = (data) => load(Route.SEND_DATA, ErrorText.SEND_DATA, 'POST', data);
 
-export {getData, sendData, SERVER};
+export {getData, sendData, SERVER, ErrorText};

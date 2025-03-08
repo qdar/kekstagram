@@ -15,11 +15,15 @@ function generateModal(x) {
   x.classList.remove('hidden');
 }
 
+const hideModal = (x) => {
+  body.classList.remove('modal-open');
+  x.classList.add('hidden');
+};
+
 function closeModal(button, x) {
   button.addEventListener('click', () => {
-    body.classList.remove('modal-open');
-    x.classList.add('hidden');
+    hideModal(x);
   });
 }
 
-export {generateModal, closeModal, onPopupEscKeydown};
+export {generateModal, closeModal, onPopupEscKeydown, hideModal};

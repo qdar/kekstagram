@@ -55,4 +55,4 @@ pristine.addValidator(
 isAtiveElement(hashtagField);
 isAtiveElement(descriptionField);
 
-export {uploadOverlay, pristine};
+export {uploadOverlay, pristine, uploadCancel};

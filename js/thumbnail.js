@@ -4,6 +4,8 @@ import {getRandomArrayElement, rangeGenerator, getRandomInteger} from './functio
 import {createComment} from './comments.js';
 import { generateModal } from './modal.js';
 import { generateBigPicture, bigPicture } from './singleImage.js';
+import { showAlert } from './functions.js';
+import {ErrorText} from './api.js';
 
 const generatePhotoId = rangeGenerator(1, 100);
 const generatePhotoUrl = rangeGenerator(1, PHOTO_COUNT);
@@ -15,26 +17,40 @@ const createThumbnail = () => ({
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: Array.from({length: getRandomInteger(1, COMMENTS_MAX_COUNT)}, createComment),
 });
+const renderGallery = (data) => {
 
-const renderThumbnails = (count) => Array.from({length: count }, createThumbnail);
-const thumbnails = renderThumbnails(PHOTO_COUNT);
+  const renderThumbnails = (count) => Array.from({length: count }, createThumbnail);
+  const thumbnails = renderThumbnails(PHOTO_COUNT);
 
-const thumbnailsSection = document.querySelector('.pictures');
-const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  const thumbnailsSection = document.querySelector('.pictures');
+  const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-thumbnails.forEach((photo) => {
-  const pictureLink = thumbnailTemplate.cloneNode(true);
-  pictureLink.querySelector('.picture__likes').textContent = photo.likes;
-  pictureLink.querySelector('.picture__comments').textContent = photo.comments.length;
-  pictureLink.querySelector('.picture__img').src = photo.url;
-  thumbnailsSection.appendChild(pictureLink);
+  thumbnails.forEach((photo) => {
+    const pictureLink = thumbnailTemplate.cloneNode(true);
+    pictureLink.querySelector('.picture__likes').textContent = photo.likes;
+    pictureLink.querySelector('.picture__comments').textContent = photo.comments.length;
+    pictureLink.querySelector('.picture__img').src = photo.url;
+    thumbnailsSection.appendChild(pictureLink);
 
-  pictureLink.addEventListener('click', () => {
-    generateModal(bigPicture);
-    generateBigPicture(photo);
+    pictureLink.addEventListener('click', () => {
+      generateModal(bigPicture);
+      generateBigPicture(photo);
+    });
+
+    const pictureListFragment = document.createDocumentFragment();
+    thumbnailsSection.appendChild(pictureListFragment);
   });
 
-  const pictureListFragment = document.createDocumentFragment();
-  thumbnailsSection.appendChild(pictureListFragment);
+};
 
-});
+fetch('https://28.javascript.htmlacademy.pro/kekstagram/data', {
+  method: 'GET', body: null
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    renderGallery(data);
+  })
+  .catch(() => {
+    showAlert (ErrorText.GET_DATA);
+  });

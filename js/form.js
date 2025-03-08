@@ -1,11 +1,14 @@
-import { showAlert } from './functions.js';
-import { pristine } from './upload.js';
+import { uploadOverlay, pristine } from './upload.js';
+import { hideModal } from './modal.js';
+// import { sendData } from './api.js';
+// import { showAlert } from './functions.js';
 
 const SubmitButtonText = {
   IDLE: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
 
+const form = document.querySelector('.img-upload__form');
 const submitForm = document.querySelector('.img-upload__submit');
 
 const blockSubmitButton = () => {
@@ -17,33 +20,34 @@ const unblockSubmitButton = () => {
   submitForm.disabled = false;
   submitForm.textContent = SubmitButtonText.IDLE;
 };
+
 const setOnFormSubmit = (cb) => {
-  submitForm.addEventListener('submit', async (evt) => {
+  form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
 
     if (isValid) {
       blockSubmitButton();
-      await cb(new FormData(submitForm));
+      await cb(new FormData(form));
+      hideModal(uploadOverlay);
       unblockSubmitButton();
     }
-
-    // if (isValid) {
-    //   blockSubmitButton();
-    //   await cb(new FormData(evt.target))
-    //     .then(() => {
-    //       showAlert('Данные успешно отправлены');
-    //     })
-    //     .catch(
-    //       (err) => {
-    //         showAlert(err.message);
-    //       }
-    //     )
-    //     .finally(unblockSubmitButton);
-    // }
   });
 };
+
+
+// const OnFormSubmit = new Promise(function (resolve, reject) {
+//   resolve(sendData(data));
+// });
+
+// const OnFormSubmit = new Promise(function (resolve, reject) {
+//   reject(
+//     new Error('Не удалось отправить форму. Попробуйте еще раз')
+//   );
+// });
+
+// OnFormSubmit.then(() => {}).catch(() => {});
 
 
 export {setOnFormSubmit};
