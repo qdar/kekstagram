@@ -23,12 +23,24 @@ function resetForm() {
   pristine.reset();
 }
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
+const preview = document.querySelector('.img-upload__preview img');
+
 uploadButton.addEventListener('change', () => {
   generateModal(uploadOverlay);
   document.addEventListener('keydown', (evt) => onPopupEscKeydown(evt, uploadOverlay));
   resetScale();
   resetEffects();
   resetForm();
+
+  const file = uploadButton.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    preview.src = URL.createObjectURL(file);
+  }
 });
 
 closeModal(uploadCancel, uploadOverlay);

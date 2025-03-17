@@ -3,6 +3,7 @@ import './upload.js';
 import './scale.js';
 import './effects.js';
 import './form.js';
+import './sort.js';
 
 import {sendData} from './api.js';
 import {showAlert} from './functions.js';
@@ -13,6 +14,6 @@ setOnFormSubmit(async (data) => {
     sendData(data);
     showAlert('Данные успешно отправлены');
   } catch (err) {
-    showAlert (err.message);
+    showAlert(err.message);
   }
 });

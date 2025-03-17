@@ -5,7 +5,8 @@
 import { generateModal } from './modal.js';
 import { generateBigPicture, bigPicture } from './singleImage.js';
 import { showAlert } from './functions.js';
-import {getData} from './api.js';
+import { getData } from './api.js';
+// import { onFilterClick } from './sort.js';
 
 
 // генерация демонстрационных данных
@@ -22,10 +23,10 @@ import {getData} from './api.js';
 // const renderThumbnails = (count) => Array.from({length: count }, createThumbnail);
 // const thumbnails = renderThumbnails(PHOTO_COUNT);
 
-const renderGallery = (thumbnails) => {
-  const thumbnailsSection = document.querySelector('.pictures');
-  const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const thumbnailsSection = document.querySelector('.pictures');
 
+const renderGallery = (thumbnails) => {
+  const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
   thumbnails.forEach((photo) => {
     const pictureLink = thumbnailTemplate.cloneNode(true);
     pictureLink.querySelector('.picture__likes').textContent = photo.likes;
@@ -43,12 +44,21 @@ const renderGallery = (thumbnails) => {
   });
 };
 
+const removeThumbnails = () => {
+  thumbnailsSection.querySelectorAll('.picture').forEach((element) => element.remove());
+};
+
+const filter = document.querySelector('.img-filters');
+const pictures = await getData();
+
 try {
-  const data = await getData();
-  renderGallery(data);
+  renderGallery(pictures);
+  filter.classList.remove('img-filters--inactive');
 } catch (err) {
-  showAlert (err.message);
+  showAlert(err.message);
 }
+
+export {pictures, removeThumbnails, renderGallery};
 
 // получение данных
 // fetch('https://28.javascript.htmlacademy.pro/kekstagram/data', {
