@@ -1,5 +1,4 @@
-import {pictures} from './thumbnail.js';
-import {removeThumbnails, renderGallery} from './thumbnail.js';
+import {pictures, removeThumbnails, renderGallery} from './thumbnail.js';
 import {debounce} from './functions.js';
 
 const filtersButton = document.querySelectorAll('.img-filters__button');
@@ -22,12 +21,12 @@ const onFilterClick = (evt) => {
   }
 
   if (result === 'filter-random') {
-    const random = pictures.slice(0, 10).sort(() => 0.5 - Math.random());
+    const random = pictures.slice(0, 10).toSorted(() => 0.5 - Math.random());
     debounce(renderGallery, 500)(random);
   }
 
   if (result === 'filter-discussed') {
-    const discussed = pictures.sort((a, b) => b.comments.length - a.comments.length);
+    const discussed = pictures.toSorted((a, b) => b.comments.length - a.comments.length);
     debounce(renderGallery, 500)(discussed);
   }
 };
